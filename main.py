@@ -32,10 +32,14 @@ class Main(QtGui.QMainWindow):
         return False
 
     def getStatus(self):
+        result = []
         url = self.constants.baseurl + '/vfs2/feededuct/deductFeeOSMessage.html'
         html = BeautifulSoup(self.http.sendRequest('get', url))
         results = html.find('table', id='results').find('tbody')
-        print results
+        tds = results.findAll('td')
+        for td in tds:
+            result.append(td.text.strip())
+        return result
 
     def getCookies(self):
         fileHandle = open('acc.txt', 'r')
