@@ -6,13 +6,30 @@ from PyQt4.QtCore  import *
 import View
 from HttpHelper import HttpHelper
 from Constants import Constants
-from bs4 import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 import sched, time
 import thread
 from datetime import datetime
 
+class TimerThread(QtCore.QThread):
+    updateSignal = pyqtSignal(str)
+    # data_downloaded = QtCore.pyqtSignal(object)
+
+    def __init__(self):
+        QtCore.QThread.__init__(self)
+
+    def run(self):
+        while True:
+            now_ = datetime.now()
+            timeStr = '%d:%d:%d' % (now_.hour, now_.minute, now_.second)
+            print timeStr
+            self.updateSignal.emit(timeStr)
+            # self.updateUI(timeStr)
+            time.sleep(10)
 
 class Main(QtGui.QMainWindow):
+    updateSignal = pyqtSignal(str)
+
     def __init__(self):
         super(Main, self).__init__()
         self.initUI()
@@ -20,6 +37,8 @@ class Main(QtGui.QMainWindow):
     def initUI(self):
         self.ui = View.Ui_MainWindow()
         self.ui.setupUi(self)
+        #连接槽
+        self.updateSignal.connect(self.updateUI)
         # 初始化httpHelper
         self.http = HttpHelper()
         self.constants = Constants()
@@ -28,15 +47,9 @@ class Main(QtGui.QMainWindow):
         self.startTimerTask()
 
     def startTimerTask(self):
-        thread.start_new_thread(self.updateTime,())
-
-    def updateTime(self):
-        while True:
-            now_ = datetime.now()
-            print now_
-            timeStr = '%d:%d:%d' % (now_.hour, now_.minute, now_.second)
-            self.updateUI(timeStr)
-            time.sleep(10)
+        timer = TimerThread()
+        timer.start()
+        # thread.start_new_thread(self.updateTime,())
 
     @QtCore.pyqtSlot()
     def updateUI(self, timeStr):
