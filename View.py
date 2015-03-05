@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'directPayView.ui'
+# Form implementation generated from reading ui file 'View.ui'
 #
-# Created: Wed Oct 29 09:15:53 2014
+# Created: Thu Mar 05 12:52:18 2015
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,44 +17,37 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
-
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(800, 600)
+        MainWindow.resize(807, 600)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
-        self.inputTextEdit = QtGui.QPlainTextEdit(self.centralwidget)
-        self.inputTextEdit.setGeometry(QtCore.QRect(30, 20, 231, 521))
-        self.inputTextEdit.setObjectName(_fromUtf8("inputTextEdit"))
-
-        self.cbNeedsYuKou = QtGui.QCheckBox(MainWindow)
-        self.cbNeedsYuKou.setGeometry(QtCore.QRect(300, 150, 71, 16))
-        self.cbNeedsYuKou.setChecked(True)
-        self.cbNeedsYuKou.setObjectName(_fromUtf8("cbNeedsYuKou"))
-
-        self.refreshBtn = QtGui.QPushButton(self.centralwidget)
-        self.refreshBtn.setGeometry(QtCore.QRect(300, 200, 75, 23))
-        self.refreshBtn.setObjectName(_fromUtf8("payBtn"))
-        self.mergeBtn = QtGui.QPushButton(self.centralwidget)
-        self.mergeBtn.setGeometry(QtCore.QRect(300, 235, 75, 23))
-        self.mergeBtn.setObjectName(_fromUtf8("payBtn"))
-        self.payBtn = QtGui.QPushButton(self.centralwidget)
-        self.payBtn.setGeometry(QtCore.QRect(300, 270, 75, 23))
-        self.payBtn.setObjectName(_fromUtf8("payBtn"))
-        self.outputTextEdit = QtGui.QPlainTextEdit(self.centralwidget)
-        self.outputTextEdit.setGeometry(QtCore.QRect(410, 20, 261, 521))
-        self.outputTextEdit.setObjectName(_fromUtf8("outputTextEdit"))
+        self.label_status1 = QtGui.QLabel(self.centralwidget)
+        self.label_status1.setGeometry(QtCore.QRect(30, 10, 181, 31))
+        self.label_status1.setObjectName(_fromUtf8("label_status1"))
+        self.label_status2 = QtGui.QLabel(self.centralwidget)
+        self.label_status2.setGeometry(QtCore.QRect(30, 50, 181, 31))
+        self.label_status2.setObjectName(_fromUtf8("label_status2"))
+        self.text_time = QtGui.QTextEdit(self.centralwidget)
+        self.text_time.setGeometry(QtCore.QRect(30, 100, 181, 101))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("Agency FB"))
+        font.setPointSize(22)
+        font.setBold(True)
+        font.setWeight(75)
+        self.text_time.setFont(font)
+        self.text_time.setReadOnly(True)
+        self.text_time.setObjectName(_fromUtf8("text_time"))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 19))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 807, 23))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
@@ -66,7 +59,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
-        self.cbNeedsYuKou.setText(_translate("MainWindow", "下载预扣", None))
-        self.payBtn.setText(_translate("MainWindow", "应用", None))
-        self.refreshBtn.setText(_translate("MainWindow", "刷新", None))
-        self.mergeBtn.setText(_translate("MainWindow", "合并", None))
+        self.label_status1.setText(_translate("MainWindow", "TextLabel", None))
+        self.label_status2.setText(_translate("MainWindow", "TextLabel", None))
+

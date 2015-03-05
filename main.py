@@ -6,7 +6,11 @@ from PyQt4.QtCore  import *
 import View
 from HttpHelper import HttpHelper
 from Constants import Constants
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
+import sched, time
+import thread
+from datetime import datetime
+
 
 class Main(QtGui.QMainWindow):
     def __init__(self):
@@ -21,6 +25,22 @@ class Main(QtGui.QMainWindow):
         self.constants = Constants()
         self.getCookies()
         self.getStatus()
+        self.startTimerTask()
+
+    def startTimerTask(self):
+        thread.start_new_thread(self.updateTime,())
+
+    def updateTime(self):
+        while True:
+            now_ = datetime.now()
+            print now_
+            timeStr = '%d:%d:%d' % (now_.hour, now_.minute, now_.second)
+            self.updateUI(timeStr)
+            time.sleep(10)
+
+    @QtCore.pyqtSlot()
+    def updateUI(self, timeStr):
+        self.ui.text_time.setPlainText(timeStr)
 
     def checkOneLine(self, line):
         if u'记账中' in line:
